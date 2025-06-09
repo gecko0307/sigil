@@ -4,7 +4,7 @@ This is a minimal engine/template for a browser-based pixelart 2D online RPG tha
 It is **occasionally** available online at [https://cloud.timurgafarov.ru/sigil-demo/](https://cloud.timurgafarov.ru/sigil-demo/).
 
 Implemented features:
-* Game client and server
+* Game client (HTML5 + Phaser) and server (Node.js)
 * Registration and authentication
 * Grid-based point-and-click movement using [EasyStar.js](https://www.easystarjs.com/) pathfinding library
 * Tile-based maps using [Tiled](https://www.mapeditor.org) for an editor

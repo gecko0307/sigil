@@ -432,7 +432,7 @@ function wsServerURL() {
     if (isLocalhost)
         return "ws://localhost:8050";
     else
-        return "wss://cloud.timurgafarov.ru/sigil/";
+        return "wss://cloud.timurgafarov.ru/sigil-server/";
 }
 
 function connect() {

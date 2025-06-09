@@ -1,12 +1,57 @@
-# Phaser RPG
-This is a minimal engine/template for a browser-based pixelart 2D RPG that I've written for fun while learning [Phaser 3](https://phaser.io/), an awesome HTML5 game engine. Probably it can be useful for building a client for a full-featured game, feel free to use it in your project.
+# Sigil
+This is a minimal engine/template for a browser-based pixelart 2D online RPG that I've written for fun while learning [Phaser 3](https://phaser.io/), an awesome HTML5 game engine. It is mostly inspired by [Margonem](https://margonem.com/).
 
-You can try it online at [https://gecko0307.github.io/phaser-rpg](https://gecko0307.github.io/phaser-rpg/).
+It is **occasionally** available online at [https://cloud.timurgafarov.ru/sigil-demo/](https://cloud.timurgafarov.ru/sigil-demo/).
 
 Implemented features:
-* Character animation
+* Game client and server
+* Registration and authentication
 * Grid-based point-and-click movement using [EasyStar.js](https://www.easystarjs.com/) pathfinding library
 * Tile-based maps using [Tiled](https://www.mapeditor.org) for an editor
-* Basic GUI and an unfinished dialog system
+* Character animation
+* NPC citizens
+* Basic GUI and a dialog system
+
+TODO:
+* Display other users
+* Inventory and items
+* Quests
+* Battle system
+* Enemies
 
 [![Screenshot](screenshot.jpg)](screenshot.jpg)
+
+## Installation
+
+Installing Sigil on a Linux server is very easy: just do `npm install` and copy all the files to the dedicated server directory, for example `/opt/sigil`. Then add a `sigil.service` to `/etc/systemd/system`:
+
+```
+[Unit]
+Description=Sigil WebSocket Server
+After=network.target
+
+[Service]
+ExecStart=node /opt/sigil/src/index.mjs
+WorkingDirectory=/opt/sigil
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+User=<your server user>
+Group=<your server group>
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Make sure that your server user has write access to `/opt/sigil/db`.
+
+Then run
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable --now sigil
+```
+
+Configure your reverse proxy to route `/sigil-server` to `localost:8050`.
+
+Copy the client to your publicly available web folder, for example `var/www/html/sigil-client`, and you are done.

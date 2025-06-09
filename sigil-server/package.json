@@ -1,0 +1,22 @@
+{
+    "name": "sigil-server",
+    "version": "1.0.0",
+    "description": "MMORPG server",
+    "author": "Gecko",
+    "license": "MIT",
+    "main": "src/index.js",
+    "dependencies": {
+        "bcrypt": "^5.1.1",
+        "easystarjs": "^0.4.4",
+        "nanoid": "^3.3.11",
+        "node-persist": "^4.0.4",
+        "ws": "^8.18.2"
+    },
+    "optionalDependencies": {
+        "bufferutil": "^4.0.9",
+        "utf-8-validate": "^6.0.5"
+    },
+    "scripts": {
+        "test": "node src/index.mjs"
+    }
+}

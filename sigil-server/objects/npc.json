@@ -1,0 +1,10 @@
+{
+    "map1_alien": {
+        "type": ["citizen"]
+    },
+    "map1_doriana": {
+        "type": ["citizen", "vendor"],
+        "sprite": "doriana",
+        "displayName": "Doriana Velmer"
+    }
+}

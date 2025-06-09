@@ -1,0 +1,12 @@
+{
+    "start": {
+        "context": "greeting",
+        "text": "Hello, traveller! Welcome to our village!",
+        "replies": []
+    },
+    "greeting": {
+        "context": "greeting",
+        "text": "Hello again!",
+        "replies": []
+    }
+}

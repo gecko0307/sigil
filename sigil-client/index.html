@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content="Sigil test client"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <title>Sigil Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            box-sizing: border-box;
+            width: 300px;
+            padding: 8px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        #greeting {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="auth-container">
+        <h2>Login / Register</h2>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="you@example.com">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="●●●●●●●">
+
+        <label for="displayName">Display Name (only for register):</label>
+        <input type="text" id="displayName" placeholder="Your Name">
+
+        <button onclick="register()">Register</button>
+        <button onclick="login()">Login</button>
+
+        <div id="greeting"></div>
+    </div>
+
+    <script>
+        const emailField = document.getElementById("email");
+        const passwordField = document.getElementById("password");
+        const displayNameField = document.getElementById("displayName");
+        const greeting = document.getElementById("greeting");
+
+        let ws;
+        
+        function wsServerURL() {
+            var isLocalhost =
+                window.location.hostname == "localhost" ||
+                window.location.hostname == "127.0.0.1";
+            if (isLocalhost)
+                return "ws://localhost:8050";
+            else
+                return "wss://cloud.timurgafarov.ru/sigil/";
+        }
+
+        function connect(onConnected = null) {
+            if (ws) {
+                ws.close();
+            }
+
+            ws = new WebSocket(wsServerURL());
+
+            ws.onopen = () => {
+                console.log("Connected to WebSocket server.");
+                
+                if (onConnected)
+                    onConnected();
+                else
+                {
+                    const sessionId = localStorage.getItem("sigil_sessionId");
+                    if (sessionId) {
+                        validateSession(sessionId);
+                    }
+                }
+            };
+
+            ws.onmessage = (event) => {
+                try {
+                    const msg = JSON.parse(event.data);
+                    console.log("Server response:", msg);
+                    if (msg.action === "validate") {
+                        if (msg.result) {
+                            closeConnection();
+                            window.location.href = "game.html";
+                        }
+                        else {
+                            localStorage.removeItem("sigil_sessionId");
+                            console.log(msg.message || "Unknown error");
+                            greeting.textContent = `${msg.message || "Unknown error"}`;
+                        }
+                    }
+                    else if (msg.action === "login" || msg.action === "register") {
+                        if (msg.result) {
+                            localStorage.setItem("sigil_sessionId", msg.payload.sessionId);
+                            closeConnection();
+                            window.location.href = "game.html";
+                        }
+                        else {
+                            console.error(msg.message || "Unknown error");
+                            greeting.textContent = `${msg.message || "Unknown error"}`;
+                        }
+                    }
+                }
+                catch(e) {
+                    console.error("Invalid message:", event.data);
+                }
+            };
+
+            ws.onclose = () => {
+                console.log("Connection closed.");
+            };
+
+            ws.onerror = (err) => {
+                console.error("WebSocket error:", err);
+            };
+        }
+        
+        connect();
+        
+        function validateSession(sessionId) {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                connect(validateSession);
+            }
+            else {
+                const message = {
+                    action: "validate",
+                    payload: { sessionId }
+                };
+                ws.send(JSON.stringify(message));
+            }
+        }
+
+        function register() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                connect(register);
+            }
+            else {
+                const message = {
+                    action: "register",
+                    payload: {
+                        email: emailField.value,
+                        password: passwordField.value,
+                        displayName: displayNameField.value
+                    }
+                };
+                ws.send(JSON.stringify(message));
+            }
+        }
+
+        function login() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                connect(login);
+            }
+            else {
+                const message = {
+                    action: "login",
+                    payload: {
+                        email: emailField.value,
+                        password: passwordField.value
+                    }
+                };
+                ws.send(JSON.stringify(message));
+            }
+        }
+
+        function closeConnection() {
+            if (ws) {
+                ws.close();
+            }
+        }
+    </script>
+</body>
+</html>

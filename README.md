@@ -23,7 +23,7 @@ TODO:
 
 ## Installation
 
-Installing Sigil on a Linux server is very easy: just do `npm install` and copy all the files to the dedicated server directory, for example `/opt/sigil`. Then add a `sigil.service` to `/etc/systemd/system`:
+Installing Sigil on a Linux server is very easy: just do `npm install` in `sigil-server` and copy all the files to the dedicated server directory, for example `/opt/sigil`. Then add a `sigil.service` to `/etc/systemd/system`:
 
 ```
 [Unit]
@@ -54,4 +54,4 @@ sudo systemctl enable --now sigil
 
 Configure your reverse proxy to route `/sigil-server` to `localost:8050`.
 
-Copy the client to your publicly available web folder, for example `var/www/html/sigil-client`, and you are done.
+Copy `sigil-client` to your publicly available web folder, for example `var/www/html/sigil-client`, and you are done.

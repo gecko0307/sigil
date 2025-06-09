@@ -4,7 +4,7 @@
     "description": "MMORPG server",
     "author": "Gecko",
     "license": "MIT",
-    "main": "src/index.js",
+    "main": "src/index.mjs",
     "dependencies": {
         "bcrypt": "^5.1.1",
         "easystarjs": "^0.4.4",

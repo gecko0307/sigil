@@ -3,11 +3,13 @@ import users from "./users.mjs";
 import { loginUser, registerUser } from "./auth.mjs";
 import session from "./session.mjs";
 import npc from "./npc.mjs";
+import items from "./items.mjs";
 import map from "./map.mjs";
 import actions from "./actions.mjs";
 import { success, failure } from "./responce.mjs";
 
 npc.init();
+items.init();
 map.init();
 
 let logEnabled = false;

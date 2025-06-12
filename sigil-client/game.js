@@ -166,24 +166,77 @@ Game.create = function() {
 var dialog = document.getElementById("dialog_container");
 var dialogMessage = document.getElementById("dialog_message");
 var dialogVisible = false;
+var dialogBtnReplies = [
+    document.getElementById("dialog_btn_reply1")
+];
 var dialogBtnQuit = document.getElementById("dialog_btn_quit");
 
-dialogBtnQuit.onclick = function() {
+var currentDialog = {
+    npc: null,
+    context: null
+};
+
+function closeDialog() {
     gsap.set(dialog, { pointerEvents: "none" });
     gsap.to(dialog, 0.25, { visibility: "hidden", autoAlpha: 0 });
     dialogVisible = false;
-};
+    currentDialog.npc = null;
+    currentDialog.context = null;
+}
+
+dialogBtnQuit.onclick = closeDialog;
+
+for (var i = 0; i < dialogBtnReplies.length; i++) {
+    dialogBtnReplies[i].onclick = function(e) {
+        var replyIndex = parseInt(e.currentTarget.dataset.index || "0");
+        if (currentDialog.npc && currentDialog.context)
+            replyToDialog(currentDialog.npc, currentDialog.context, replyIndex);
+    };
+}
 
 function showDialog(title, message) {
-    dialogVisible = true;
-    dialogMessage.innerHTML = message.text;
-    if (message.text.length > 300)
-        gsap.set(dialog, { height: 300 });
-    else
-        gsap.set(dialog, { height: 200 });
-    gsap.fromTo(dialog, 0.25, { visibility: "visible", autoAlpha: 0, scaleY: 0 }, { autoAlpha: 1, scaleY: 1, onComplete: function() {
-        gsap.set(dialog, { pointerEvents: "auto" });
-    }});
+    var delay = 0;
+    if (dialogVisible) {
+        closeDialog();
+        delay = 0.25;
+    }
+    
+    gsap.delayedCall(delay, function(title, message){
+        dialogVisible = true;
+        dialogMessage.innerHTML = message.text;
+        
+        currentDialog.context = message.context;
+        
+        if (message.text.length > 300)
+            gsap.set(dialog, { height: 300 });
+        else
+            gsap.set(dialog, { height: 200 });
+        
+        gsap.set(dialogBtnReplies, { visibility: "hidden" });
+        for (var i = 0; i < message.replies.length; i++) {
+            var replyElement = dialogBtnReplies[i];
+            if (replyElement) {
+                replyElement.innerHTML = message.replies[i];
+                replyElement.style.visibility = "visible";
+            }
+        }
+        
+        gsap.fromTo(dialog, 0.25, { visibility: "visible", autoAlpha: 0, scaleY: 0 }, { autoAlpha: 1, scaleY: 1, onComplete: function() {
+            gsap.set(dialog, { pointerEvents: "auto" });
+        }});
+    }, [title, message])
+}
+
+function showTradeDialog(title, supply) {
+    var delay = 0;
+    if (dialogVisible) {
+        closeDialog();
+        delay = 0.25;
+    }
+    
+    gsap.delayedCall(delay, function(title, message){
+        // TODO
+    });
 }
 
 function playerIsCloseTo(x, y) {
@@ -223,11 +276,33 @@ function handleInteractionWith(obj) {
         return;
     }
     
+    currentDialog.npc = obj;
+    
     const message = {
         action: "interact",
         payload: {
             sessionId,
             objectId: obj.name
+        }
+    };
+    ws.send(JSON.stringify(message));
+}
+
+function replyToDialog(npc, context, replyIndex) {
+    console.log("Reply to ", npc.type, npc.name, ":", "[", context, "]", replyIndex);
+    
+    if (!ws || ws.readyState !== WebSocket.OPEN) {
+        console.error("WebSocket is not connected.");
+        return;
+    }
+    
+    const message = {
+        action: "reply",
+        payload: {
+            sessionId,
+            objectId: npc.name,
+            context,
+            replyIndex
         }
     };
     ws.send(JSON.stringify(message));
@@ -478,12 +553,14 @@ function connect() {
                 if (msg.payload.type === "dialog") {
                     showDialog(msg.payload.title, msg.payload.message);
                 }
-                else { // TODO
+                else if (msg.payload.type === "trade") {
+                    showTradeDialog(msg.payload.title, msg.payload.supply);
+                }
+                else {
+                    // TODO
                 }
             }
-            else {
-                // no-op
-            }
+            else { } // no-op
         }
         else if (msg.action === "location") {
             if (msg.result) {

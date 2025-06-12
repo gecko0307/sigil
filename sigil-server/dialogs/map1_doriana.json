@@ -2,11 +2,19 @@
     "start": {
         "context": "greeting",
         "text": "Hello, traveller! Welcome to our village!",
-        "replies": []
+        "replies": ["Trade"],
+        "actions": [{
+            "type": "trade",
+            "context": "greeting"
+        }]
     },
     "greeting": {
         "context": "greeting",
         "text": "Hello again!",
-        "replies": []
+        "replies": ["Trade"],
+        "actions": [{
+            "type": "trade",
+            "context": "greeting"
+        }]
     }
 }

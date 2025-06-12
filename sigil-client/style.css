@@ -151,8 +151,6 @@ div, img {
     position: absolute;
     width: 150px;
     height: 38px;
-    left: auto;
-    right: 20px;
     top: auto;
     bottom: 20px;
     background-image: url(data/ui/btn_normal.png);
@@ -172,6 +170,16 @@ div, img {
     background-image: url(data/ui/btn_hover.png);
 }
 
+#dialog_btn_reply1 {
+    left: 20px;
+    visibility: hidden;
+}
+
+#dialog_btn_quit {
+    left: auto;
+    right: 20px;
+}
+
 #right_container {
     width: 224px;
     height: 100%;
@@ -181,11 +189,13 @@ div, img {
 }
 
 #player_xp {
-    left: 40px;
+    left: auto;
+    right: 450px;
     width: 100%;
     height: 20px;
     color: #ffff00;
-    top: 35px;
+    top: 60px;
     font-family: "Barlow Semi Condensed";
     font-weight: bold;
+    text-align: right;
 }

@@ -16,12 +16,11 @@ function init() {
             sprite: npc.sprite || "npc_fallback",
             map: npc.map || "",
             position: npc.position || [0, 0],
-            displayName: npc.displayName || id
+            displayName: npc.displayName || id,
+            supply: npc.supply || []
         };
         npcs.set(id, npcObject);
     });
-
-    console.log(`[npc] Loaded ${npcs.size} NPCs`);
 }
     
 function set(id, newData) {

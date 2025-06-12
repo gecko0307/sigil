@@ -1,0 +1,11 @@
+{
+    "apple": { "class": 0, "price": 2, "edible": true, "effect": { "health": 5 } },
+    "bread": { "class": 0, "price": 5, "edible": true, "effect": { "health": 10 } },
+    "carrot": { "class": 0, "price": 1, "edible": true, "effect": { "health": 2 } },
+    "grape": { "class": 0, "price": 5, "edible": true, "effect": { "health": 10 } },
+    "mushroom": { "class": 0, "price": 3, "edible": true, "effect": { "health": 7 } },
+    "nuts": { "class": 0, "price": 5, "edible": true, "effect": { "health": 10 } },
+    "potato": { "class": 0, "price": 1, "edible": true, "effect": { "health": 2 } },
+    "red_vine": { "class": 0, "price": 50, "edible": true, "effect": { "health": 50, "sobriety": -25 } },
+    "watermelon": { "class": 0, "price": 5, "edible": true, "effect": { "health": 10 } }
+}

@@ -5,6 +5,7 @@
     "map1_doriana": {
         "type": ["citizen", "vendor"],
         "sprite": "doriana",
-        "displayName": "Doriana Velmer"
+        "displayName": "Doriana Velmer",
+        "supply": ["apple", "bread", "carrot", "grape", "mushroom", "nuts", "potato", "red_vine", "watermelon"]
     }
 }

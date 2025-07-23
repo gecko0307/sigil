@@ -1,1 +1,23 @@
-[]
+[
+  [
+    0,
+    {
+      "id": 0,
+      "email": "gecko0307@gmail.com",
+      "password": "$2b$10$D.9qus4xzIuxbks3KZtzpuGmMYf3TpzV5jF/VpMke3a2gkIRE7Ngm",
+      "displayName": "",
+      "props": {
+        "money": 0
+      },
+      "map": "map1",
+      "x": 22,
+      "y": 16,
+      "speed": 5,
+      "state": "idle",
+      "movement": {},
+      "npcContext": {
+        "map1_doriana": "greeting"
+      }
+    }
+  ]
+]

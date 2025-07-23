@@ -1,7 +1,7 @@
 # Sigil
 This is a minimal engine/template for a browser-based pixelart 2D online RPG that I've written for fun while learning [Phaser 3](https://phaser.io/), an awesome HTML5 game engine. It is mostly inspired by [Margonem](https://margonem.com/).
 
-It is **occasionally** available online at [https://cloud.timurgafarov.ru/sigil-demo/](https://cloud.timurgafarov.ru/sigil-demo/).
+It is **occasionally** available online at [https://timurgafarov.ru/sigil-demo/](https://timurgafarov.ru/sigil-demo/).
 
 Implemented features:
 * Game client (HTML5 + Phaser) and server (Node.js)

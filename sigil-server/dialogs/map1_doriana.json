@@ -2,19 +2,54 @@
     "start": {
         "context": "greeting",
         "text": "Hello, traveller! Welcome to our village!",
-        "replies": ["Trade"],
-        "actions": [{
-            "type": "trade",
-            "context": "greeting"
-        }]
+        "replies": ["Trade", "Who are you?"],
+        "actions": [
+            {
+                "type": "dialog",
+                "context": "trade"
+            },
+            {
+                "type": "dialog",
+                "context": "bio"
+            }
+        ]
     },
     "greeting": {
         "context": "greeting",
         "text": "Hello again!",
+        "replies": ["Trade", "Who are you?"],
+        "actions": [
+            {
+                "type": "dialog",
+                "context": "trade"
+            },
+            {
+                "type": "dialog",
+                "context": "bio"
+            }
+        ]
+    },
+    "greeting2": {
+        "context": "greeting",
+        "text": "Hello again!",
         "replies": ["Trade"],
-        "actions": [{
-            "type": "trade",
-            "context": "greeting"
-        }]
+        "actions": [
+            {
+                "type": "dialog",
+                "context": "trade"
+            }
+        ]
+    },
+    "trade": {
+        "context": "greeting",
+        "text": "Sorry, our game overlords haven't implemented trading yet. Come later!",
+        "replies": [],
+        "actions": []
+    },
+    "bio": {
+        "context": "greeting2",
+        "text": "My name is Doriana. I'm a local farmer's daughter.",
+        "replies": [],
+        "actions": []
     }
 }

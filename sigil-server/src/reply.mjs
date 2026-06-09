@@ -21,15 +21,16 @@ async function checkFileExists(filePath) {
 }
 
 async function handleReplyAction(socket, user, payload) {
-    const { objectId, context, replyIndex } = payload;
+    const { objectId, replyIndex } = payload;
     const mapName = user.map;
-    console.log(`[action] Reply of user ${user.id} on map "${mapName}" to object "${objectId}"`);
+    console.log(`[action] Reply ${replyIndex} of user ${user.id} on map "${mapName}" to object "${objectId}"`);
     if (map.exists(mapName)) {
         const character = npc.get(objectId);
         if (character) {
             const cx = character.position[0];
             const cy = character.position[1];
             if (isCloseTo(user.x, user.y, cx, cy) === true) {
+                const context = user.npcContext[objectId] || "start";
                 const dialogFilename = path.join("dialogs", objectId + ".json");
                 if (await checkFileExists(dialogFilename)) {
                     const raw = await fs.readFile(dialogFilename, "utf8");
@@ -37,10 +38,12 @@ async function handleReplyAction(socket, user, payload) {
                     const message = messages[context];
                     if (message.actions[replyIndex]) {
                         const action = message.actions[replyIndex];
-                        user.npcContext[objectId] = action.context;
+                        const replyMessage = messages[action.context];
+                        user.npcContext[objectId] = replyMessage.context;
                         success(socket, "interact", {
-                            type: "trade",
+                            type: action.type,
                             title: character.displayName,
+                            message: replyMessage,
                             supply: character.supply
                         });
                     }

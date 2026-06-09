@@ -167,7 +167,8 @@ var dialog = document.getElementById("dialog_container");
 var dialogMessage = document.getElementById("dialog_message");
 var dialogVisible = false;
 var dialogBtnReplies = [
-    document.getElementById("dialog_btn_reply1")
+    document.getElementById("dialog_btn_reply1"),
+    document.getElementById("dialog_btn_reply2")
 ];
 var dialogBtnQuit = document.getElementById("dialog_btn_quit");
 
@@ -213,6 +214,7 @@ function showDialog(title, message) {
             gsap.set(dialog, { height: 200 });
         
         gsap.set(dialogBtnReplies, { visibility: "hidden" });
+        console.log(message.replies);
         for (var i = 0; i < message.replies.length; i++) {
             var replyElement = dialogBtnReplies[i];
             if (replyElement) {

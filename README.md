@@ -7,7 +7,7 @@ Implemented features:
 * Game client (HTML5 + Phaser) and server (Node.js)
 * Registration and authentication
 * Grid-based point-and-click movement using [EasyStar.js](https://www.easystarjs.com/) pathfinding library
-* Tile-based maps using [Tiled](https://www.mapeditor.org) for an editor
+* Tile-based maps using [Tiled](https://www.mapeditor.org) for an editor. Multi-layer maps
 * Character animation
 * NPC citizens
 * Basic GUI and a dialog system

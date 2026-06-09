@@ -176,6 +176,11 @@ div, img {
     visibility: hidden;
 }
 
+#dialog_btn_reply2 {
+    left: 222px;
+    visibility: hidden;
+}
+
 #dialog_btn_quit {
     left: auto;
     right: 20px;

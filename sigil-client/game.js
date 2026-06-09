@@ -505,9 +505,9 @@ function wsServerURL() {
         window.location.hostname == "localhost" ||
         window.location.hostname == "127.0.0.1";
     if (isLocalhost)
-        return "ws://localhost:8050";
+        return sigilLocalServer;
     else
-        return "wss://cloud.timurgafarov.ru/sigil-server/";
+        return sigilProductionServer;
 }
 
 function connect() {

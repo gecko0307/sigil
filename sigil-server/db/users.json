@@ -10,8 +10,8 @@
         "money": 0
       },
       "map": "map1",
-      "x": 22,
-      "y": 16,
+      "x": 23,
+      "y": 14,
       "speed": 5,
       "state": "idle",
       "movement": {},

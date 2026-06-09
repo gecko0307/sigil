@@ -54,4 +54,10 @@ sudo systemctl enable --now sigil
 
 Configure your reverse proxy to route `/sigil-server` to `localost:8050`.
 
-Copy `sigil-client` to your publicly available web folder, for example `var/www/html/sigil-client`, and you are done.
+Copy `sigil-client` to your publicly available web folder, for example `var/www/html/sigil-client`.
+
+Modify `sigil-client/config.js`. `sigilProductionServer` global variable should contain public URL of your running Sigil instance. For example:
+
+```javascript
+var sigilProductionServer = "wss://mygame.com/sigil-server/";
+```

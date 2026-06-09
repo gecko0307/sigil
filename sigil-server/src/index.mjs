@@ -14,8 +14,10 @@ map.init();
 
 let logEnabled = false;
 
+const port = 8050;
+
 let wss = new WebSocketServer({
-    port: 8050
+    port: port
 });
 
 wss.on("connection", (ws) => {
@@ -151,4 +153,4 @@ process.on("SIGINT", () => {
     terminate();
 });
 
-console.log("[process] Sigil is running on ws://localhost:8080");
+console.log("[process] Sigil is running on ws://localhost:" + port);

@@ -1,6 +1,8 @@
 # Sigil
 This is a minimal engine/template for a browser-based pixelart 2D online RPG that I've written for fun while learning [Phaser 3](https://phaser.io/), an awesome HTML5 game engine. It is mostly inspired by [Margonem](https://margonem.com/).
 
+Sigil features a semi-realtime WebSocket server that updates the global state with 0.1s intervals. It has almost zero overhead when no players are logged in.
+
 Implemented features:
 * Game client (HTML5 + Phaser) and server (Node.js)
 * Registration and authentication

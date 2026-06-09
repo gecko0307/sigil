@@ -5,7 +5,7 @@
     <meta name="Keywords" content=""/>
     <meta name="Description" content="Sigil test client"/>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-    <title>Sigil Login</title>
+    <title>Sigil Registration</title>
     <style>
         body {
             font-family: sans-serif;
@@ -55,14 +55,11 @@
             font-size: 18px;
             color: #333;
         }
-        #noaccount {
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="container" id="auth-container">
-        <h2>Sign in</h2>
+        <h2>Register</h2>
 
         <label for="email">Email:</label>
         <input type="email" id="email" placeholder="you@example.com">
@@ -70,9 +67,10 @@
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="●●●●●●●">
 
-        <button onclick="login()">Play!</button>
-        
-        <div id="noaccount">Don't have a player account? <a href="register.html">Register</a></div>
+        <label for="displayName">Display Name:</label>
+        <input type="text" id="displayName" placeholder="Your Name">
+
+        <button onclick="register()">Register</button>
 
         <div id="greeting"></div>
     </div>
@@ -80,6 +78,7 @@
     <script>
         const emailField = document.getElementById("email");
         const passwordField = document.getElementById("password");
+        const displayNameField = document.getElementById("displayName");
         const greeting = document.getElementById("greeting");
 
         let ws;
@@ -166,6 +165,23 @@
                 const message = {
                     action: "validate",
                     payload: { sessionId }
+                };
+                ws.send(JSON.stringify(message));
+            }
+        }
+
+        function register() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                connect(register);
+            }
+            else {
+                const message = {
+                    action: "register",
+                    payload: {
+                        email: emailField.value,
+                        password: passwordField.value,
+                        displayName: displayNameField.value
+                    }
                 };
                 ws.send(JSON.stringify(message));
             }

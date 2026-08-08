@@ -1,3 +1,7 @@
+/*
+ * Game actions allowed for active users.
+ * Each action is implemented in its own module.
+ */
 import move from "./move.mjs";
 import interact from "./interact.mjs";
 import reply from "./reply.mjs";

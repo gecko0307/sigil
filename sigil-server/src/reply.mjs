@@ -1,3 +1,6 @@
+/*
+ * Reply request handler.
+ */
 import fs from "node:fs/promises";
 import path from "path";
 import map from "./map.mjs";

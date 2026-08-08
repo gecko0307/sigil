@@ -1,3 +1,6 @@
+/*
+ * Users database.
+ */
 import fs from "fs";
 
 const SAVE_FILE = "db/users.json";

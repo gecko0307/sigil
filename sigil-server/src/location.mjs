@@ -1,3 +1,6 @@
+/*
+ * Location-specific functions.
+ */
 import map from "./map.mjs";
 import { success } from "./responce.mjs";
 

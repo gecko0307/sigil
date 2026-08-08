@@ -1,3 +1,8 @@
+/*
+ * Entry point of the server.
+ * Initializes all the subsystems, runs a WebSocketServer,
+ * and manages a game loop.
+ */
 import WebSocket, { WebSocketServer } from "ws";
 import users from "./users.mjs";
 import { loginUser, registerUser } from "./auth.mjs";

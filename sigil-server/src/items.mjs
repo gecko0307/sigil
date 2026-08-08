@@ -1,3 +1,6 @@
+/*
+ * Items database (read-only).
+ */
 import fs from "fs";
 
 const items = new Map();

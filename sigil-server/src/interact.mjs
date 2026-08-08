@@ -1,3 +1,7 @@
+/*
+ * Handles interation request.
+ * Currently only NPC interaction is supported.
+ */
 import fs from "node:fs/promises";
 import path from "path";
 import map from "./map.mjs";

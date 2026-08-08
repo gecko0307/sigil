@@ -1,3 +1,6 @@
+/*
+ * NPCs database.
+ */
 import fs from "fs";
 
 const NPC_FILE = "objects/npc.json";

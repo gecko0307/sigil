@@ -1,3 +1,6 @@
+/*
+ * Maps database and path finding.
+ */
 import * as fs from "fs";
 import EasyStar from "easystarjs";
 import npc from "./npc.mjs";

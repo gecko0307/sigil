@@ -1,3 +1,9 @@
+/*
+ * Move request handler.
+ * A* path is calculated asynchronously, sending a responce upon success or failure.
+ * The actual movement (position update) is handled in the game loop.
+ * The client just animates a player's sprite according to the obtained path.
+ */
 import map from "./map.mjs";
 import users from "./users.mjs";
 import { success, failure } from "./responce.mjs";

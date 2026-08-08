@@ -1,3 +1,6 @@
+/*
+ * User ID generator
+ */
 import fs from "fs";
 
 const META_FILE = "db/meta.json";

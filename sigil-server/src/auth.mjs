@@ -1,3 +1,7 @@
+/*
+ * User authentification. Passwords are not stored as plaintext,
+ * the module uses Eksblowfish (via bcrypt) for password hashing and comparing.
+ */
 import users from "./users.mjs";
 import bcrypt from "bcrypt";
 import session from "./session.mjs";

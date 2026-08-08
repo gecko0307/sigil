@@ -1,3 +1,6 @@
+/*
+ * Game session manager.
+ */
 import { nanoid } from "nanoid";
 
 const sessions = new Map();

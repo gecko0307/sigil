@@ -1,3 +1,7 @@
+/*
+ * Standard responses.
+ */
+
 export function success(socket, action, payload) {
     socket.send(JSON.stringify({
         action,

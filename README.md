@@ -21,9 +21,19 @@ TODO:
 
 [![Screenshot](screenshot.jpg)](screenshot.jpg)
 
+## Prerequisites
+
+* Node.js 14 or higher
+
+Run `npm install` in `sigil-server` to install server-side dependencies. Client is fully self-sufficient.
+
+## Running Locally
+
+Run `run.sh` (or `run.bat` on Windows).
+
 ## Installation
 
-Installing Sigil on a Linux server is very easy: just do `npm install` in `sigil-server` and copy all the files to the dedicated server directory, for example `/opt/sigil`. Then add a `sigil.service` to `/etc/systemd/system`:
+Installing Sigil on a Linux server is very easy: just copy all the files to the dedicated server directory, for example `/opt/sigil`. Then add a `sigil.service` to `/etc/systemd/system`:
 
 ```
 [Unit]

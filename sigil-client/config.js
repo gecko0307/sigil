@@ -2,4 +2,4 @@
 var sigilLocalServer = "ws://localhost:8050";
 
 // Sigil server URL when running the game online
-var sigilProductionServer = "wss://cloud.timurgafarov.ru/sigil-server/";
+var sigilProductionServer = "wss://sigil.pixperfect.online/sigil-server/";

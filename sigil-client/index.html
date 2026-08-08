@@ -76,7 +76,7 @@
 
         <div id="greeting"></div>
     </div>
-
+    <script src="config.js"></script>
     <script>
         const emailField = document.getElementById("email");
         const passwordField = document.getElementById("password");
@@ -89,9 +89,9 @@
                 window.location.hostname == "localhost" ||
                 window.location.hostname == "127.0.0.1";
             if (isLocalhost)
-                return "ws://localhost:8050";
+                return sigilLocalServer;
             else
-                return "wss://cloud.timurgafarov.ru/sigil-server/";
+                return sigilProductionServer;
         }
 
         function connect(onConnected = null) {

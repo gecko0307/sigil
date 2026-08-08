@@ -23,8 +23,6 @@ TODO:
 
 ## Installation
 
-### Server
-
 Installing Sigil on a Linux server is very easy: just do `npm install` in `sigil-server` and copy all the files to the dedicated server directory, for example `/opt/sigil`. Then add a `sigil.service` to `/etc/systemd/system`:
 
 ```
@@ -54,13 +52,25 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now sigil
 ```
 
-Configure your reverse proxy to route `/sigil-server` to `localost:8050`.
+Sigil by default opens port 8050 on `localhost`. I don't recommend binding it directly to `0.0.0.0`. Instead, use a reverse proxy and configure it to route a subdirectory `/sigil-server` to `localost:8050`. For example, this is how it can be done with Caddy:
 
-### Client
+```json
+mygame.com {
+    root * /var/www/html/sigil-client
+    file_server
+    
+    reverse_proxy /sigil-server* localhost:8050 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+```
 
-Copy `sigil-client` to your publicly available web folder, for example `var/www/html/sigil-client`.
+Copy `sigil-client` to your publicly available web folder (`var/www/html/sigil-client` in the example above).
 
-Modify `sigil-client/config.js`. `sigilProductionServer` global variable should contain public URL of your running Sigil instance. For example:
+Modify `sigil-client/config.js`. `sigilProductionServer` global variable should contain public URL of your server:
 
 ```javascript
 var sigilProductionServer = "wss://mygame.com/sigil-server/";

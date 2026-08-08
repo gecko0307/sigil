@@ -64,7 +64,7 @@ sudo systemctl enable --now sigil
 
 Sigil by default opens port 8050 on `localhost`. I don't recommend binding it directly to `0.0.0.0`. Instead, use a reverse proxy and configure it to route a subdirectory `/sigil-server` to `localost:8050`. For example, this is how it can be done with Caddy:
 
-```json
+```
 mygame.com {
     root * /var/www/html/sigil-client
     file_server
